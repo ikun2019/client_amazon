@@ -29,7 +29,7 @@
                       <!-- Image -->
                       <div class="col-sm-3 text-center">
                         <a href="#">
-                          <img src="product.photo.splice('images/', '')" style="width: 150px;" class="img-fluid">
+                          <img :src="'http://localhost:8080/' + product.photo.replace('images/', '')" style="width: 150px;" class="img-fluid">
                         </a>
                       </div>
 
