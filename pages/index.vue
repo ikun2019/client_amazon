@@ -7,13 +7,18 @@
         </div>
 
         <!-- Main Content -->
-        <div class="col-xl-10 col-lg-9 md-8 col-md-8"></div>
+        <div class="col-xl-10 col-lg-9 md-8 col-md-8">
+          <FeaturedProduct/>
+        </div>
       </div>
     </div>
   </main>
 </template>
 
 <script>
+import FeaturedProduct from '~/components/FeaturedProduct';
+
 export default {
+  FeaturedProduct
 }
 </script>
