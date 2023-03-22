@@ -37,6 +37,7 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    "bootstrap-vue/nuxt",
     '@nuxtjs/axios'
   ],
 
