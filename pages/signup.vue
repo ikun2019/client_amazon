@@ -14,23 +14,38 @@
                 <!-- Your Name -->
                 <div class="a-row a-spacing-base">
                   <label for="ap_xustomer_name" class="a-form-label">Your name</label>
-                  <input type="text" name="" id="ap_customer_name" class="a-input-text form-control auth-autofocus auth-required-field auth-contact-verification-request-info">
+                  <input
+                    v-model="name"
+                    type="text"
+                    id="ap_customer_name"
+                    class="a-input-text form-control auth-autofocus auth-required-field auth-contact-verification-request-info"
+                  >
                 </div>
                 <!-- Email -->
                 <div class="a-row a-spacing-base">
                   <label for="ap_xustomer_name" class="a-form-label">Email</label>
-                  <input type="email" name="" id="ap_customer_name" class="a-input-text form-control auth-autofocus auth-required-field auth-contact-verification-request-info">
+                  <input
+                    v-model="email"
+                    type="email" 
+                    id="ap_customer_name"
+                    class="a-input-text form-control auth-autofocus auth-required-field auth-contact-verification-request-info"
+                  >
                 </div>
                 <!-- Password -->
                 <div class="a-row a-spacing-base">
                   <label for="ap_xustomer_name" class="a-form-label">Password</label>
-                  <input type="password" name="" id="ap_customer_name" class="a-input-text form-control auth-autofocus auth-required-field auth-contact-verification-request-info">
+                  <input
+                    v-model="password"
+                    type="password"
+                    id="ap_customer_name"
+                    class="a-input-text form-control auth-autofocus auth-required-field auth-contact-verification-request-info"
+                  >
                   <div class="a-alert-content">Password must be at least 6 characters</div>
                 </div>
               </div>
               <!-- Button -->
               <div class="a-row a-spacing-extra-large mb-4">
-                <span class="a-button-primary">
+                <span class="a-button-primary" @click="onSignup">
                   <span class="a-button-inner">
                     <span class="a-button-text">Create your Amazon account</span>
                   </span>
@@ -60,6 +75,37 @@
 
 <script>
 export default {
-  layout: 'none'
+  layout: 'none',
+  data() {
+    return {
+      name: '',
+      email: '',
+      password: ''
+    }
+  },
+  methods: {
+    async onSignup () {
+      try {
+        let data = {
+          name: this.name,
+          email: this.email,
+          password: this.password
+        }
+        let response = await this.$axios.$post('/api/auth/signup', data);
+        console.log(response);
+        if (response.success) {
+          this.$auth.loginWith('local', {
+            data: {
+              email: this.email,
+              password: this.password
+            }
+          })
+        };
+        this.$router.push('/');
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  }
 }
 </script>

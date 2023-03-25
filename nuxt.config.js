@@ -38,15 +38,30 @@ export default {
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
     "bootstrap-vue/nuxt",
-    '@nuxtjs/axios'
+    '@nuxtjs/axios',
+    '@nuxtjs/auth'
   ],
 
   axios: {
     proxy: true,
     baseURL: URL
   },
-
+  proxy: {
+    '/api': URL
+  },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+  },
+  auth: {
+    strategies: {
+      local: {
+        endpoints: {
+          login: {
+            propatyName: 'token'
+          },
+          logout: true
+        }
+      }
+    }
   }
 }
