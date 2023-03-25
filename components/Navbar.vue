@@ -74,15 +74,15 @@
               </a>
               <span class="icp-nav-link-border"></span>
 
-              <template>
+              <template v-if="$auth.state.loggedIn">
                 <nuxt-link to="/profile" class="nav-a nav-a-2" id="nav-linl-accoutList" tabindex="0">
-                  <span class="nav-line-1">Hello</span>
+                  <span class="nav-line-1">Hello, </span>
                   <span class="nav-line-2">
-                    Isao
+                    {{ $auth.state.user.name }}
                   </span>
                 </nuxt-link>
               </template>
-              <!-- <template v-else>
+              <template v-else>
                 <nuxt-link
                   to="/signup"
                   class="nav-a nav-a-2"
@@ -94,7 +94,7 @@
                     <span class="nav-icon nav-arrow" style="visibility: visible"></span>
                   </span>
                 </nuxt-link>
-              </template> -->
+              </template>
               <nuxt-link to="/orders" class="nav-a nav-a-2 nav-single-row-link">
                 <span class="nav-line-1"></span>
                 <span class="nav-line-2">Orders</span>
