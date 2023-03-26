@@ -40,6 +40,37 @@ export const mutations = {
         state.cartLength += product.quantity;
       })
     }
+  },
+  /*
+  1. カートの中のproductを検索
+  2. productのQtyを変更
+  3. カート内のlengthを変更
+  4. 古いpuroductを更新したproductと入れ替え
+  */
+  changeQty(state, { product, qty }) {
+    let cartProduct = state.cart.find(prod => prod.id === product.id);
+    cartProduct.quantity = qty;
+
+    state.cartLength = 0;
+    if (state.cart.length > 0) {
+      state.cart.map(product => {
+        state.cartLength += product.quantity;
+      });
+    }
+    // カート内のproductのindex番号を取得
+    let indexOfProduct = state.cart.indexOf(cartProduct);
+    // カート内の古いproductと新しいproductを入れ替え
+    state.cart.splice(indexOfProduct, 1, cartProduct);
+  },
+  /*
+  1.cartLengthからproduct.quantityを削除
+  2.削除したいproductのindex番号を取得
+  3.productを削除
+  */
+  removeProduct(state, product) {
+    state.cartLength -= product.quantity;
+    let indexOfProduct = state.cart.indexOf(product);
+    state.cart.splice(indexOfProduct, 1);
   }
 };
 

@@ -61,15 +61,15 @@
                             </label>
                           </div>
                           <div class="sc-action-links">
-                            <select>
-                              <option>Qty: &nbsp;1</option>
+                            <select @change="onChangeQuantity($event, product)">
+                              <option v-for="i in 10" :key="i" :value="i" :selected="checkQty(product.quantity, i)">Qty: &nbsp;{{ i }}</option>
                             </select>
                             &nbsp;&nbsp;
                             <span>|</span>
                             &nbsp;
                             <!-- Delete button -->
                             <span class="a-size-small">
-                              <a href="#">Delete</a>
+                              <a href="#" @click="$store.commit('removeProduct', product)">Delete</a>
                             </span>
                             &nbsp;
                             &nbsp;
@@ -198,6 +198,19 @@ import {mapGetters} from 'vuex';
 export default {
   computed: {
     ...mapGetters(['getCart', 'getCartTotalPrice', 'getCartLength'])
+  },
+  methods: {
+    onChangeQuantity(event, product) {
+      let qty = parseInt(event.target.value);
+      this.$store.commit('changeQty', { product, qty });
+    },
+    checkQty(prodQty, qty) {
+      if (parseInt(prodQty) === parseInt(qty)) {
+        return true
+      } else {
+        return false
+      }
+    }
   }
 }
 </script>
